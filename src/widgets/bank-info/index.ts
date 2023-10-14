@@ -1,0 +1,1 @@
+export { BankInfo } from './ui';

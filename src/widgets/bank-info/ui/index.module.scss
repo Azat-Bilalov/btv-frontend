@@ -1,0 +1,78 @@
+.bank-info {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 90%;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+    padding: 10px 20px;
+    font-size: 20px;
+    
+}
+
+.bank-info-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+}
+
+.bank-info-switch {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.bank-info-address {
+    padding: 10px 0;
+    font-size: 12px;
+}
+
+.bank-info-phone {
+    display: flex;
+    text-align: center;
+    padding: 10px 0px;
+    color:rgb(172, 97, 243); 
+}
+
+.bank-info-phone img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.top-close img {
+    width: 24px;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.bank-info-metro {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+.bank-info-metro img {
+    width: 25px;
+    margin-right: 10px;
+}
+
+.bank-buttons {
+    display: flex;
+    font-size: 10px;
+    justify-content: space-between;
+}
+
+@media (max-width: 425px) {
+    .bank-info {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        margin-top: 20px;
+    }
+}

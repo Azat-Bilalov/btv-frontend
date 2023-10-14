@@ -1,0 +1,58 @@
+.timelist {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.timelist-info {
+    display: flex;
+    align-items: center;
+}
+
+.timelist-info img {
+    width: 20px;
+    margin: 8px;
+}
+
+.rotated {
+    transform: rotate(180deg);
+    transition: transform 0.3s; /* Плавная анимация поворота */
+}
+
+.rotated-reverse {
+    transform: rotate(0deg);
+    transition: transform 0.3s; /* Плавная анимация поворота */
+}
+
+.timelist-text b {
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.timelist-text p {
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    font-weight: lighter;
+    color: gray;
+}
+
+.timelist-more img {
+    margin: 5px;
+    cursor: pointer;
+    width: 25px;
+}
+
+.time-info {
+    width: 100%;
+    margin: 10px;   
+}
+
+.time-info-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
