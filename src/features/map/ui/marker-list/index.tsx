@@ -1,17 +1,12 @@
 import { MapMarker } from '@/entities/map/ui';
-import { LatLng, Routing, latLng } from 'leaflet';
+import { LatLng } from 'leaflet';
 import React from 'react';
 import { LayersControl, LayerGroup, useMapEvents } from 'react-leaflet';
 import { useMapStore } from '../../model';
 import { observer } from 'mobx-react-lite';
 import _ from 'lodash';
 
-export type MarkerListProps = {
-  instance: Routing.Control;
-  location: LatLng | null;
-};
-
-const MarkerList: React.FC<MarkerListProps> = ({ instance, location }) => {
+const MarkerList: React.FC = () => {
   const { atms, offices, selected, fetch, setSelected } = useMapStore();
   const [bounds, setBounds] = React.useState<LatLng[] | null>(null);
 
@@ -62,14 +57,7 @@ const MarkerList: React.FC<MarkerListProps> = ({ instance, location }) => {
               key={atm._id}
               type={selected?._id === atm._id ? 'active-atm' : 'atm'}
               position={[atm.latitude, atm.longitude]}
-              onClick={() => {
-                if (location === null) return;
-                instance.setWaypoints([
-                  latLng([atm.latitude, atm.longitude]),
-                  location,
-                ]);
-                setSelected(atm, 'atm');
-              }}
+              onClick={() => setSelected(atm, 'atm')}
             />
           ))}
         </LayerGroup>
@@ -81,14 +69,7 @@ const MarkerList: React.FC<MarkerListProps> = ({ instance, location }) => {
               key={office._id}
               type="office"
               position={[office.latitude, office.longitude]}
-              onClick={() => {
-                if (location === null) return;
-                instance.setWaypoints([
-                  latLng([office.latitude, office.longitude]),
-                  location,
-                ]);
-                setSelected(office, 'office');
-              }}
+              onClick={() => setSelected(office, 'office')}
             />
           ))}
         </LayerGroup>
