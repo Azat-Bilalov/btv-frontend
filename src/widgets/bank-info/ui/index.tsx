@@ -21,9 +21,9 @@ const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
   const { atm, fetch } = useAtmStore();
 
   React.useEffect(() => {
-    if (selected && 
+    if (selected) {
       // если тип объекта не равен atm
-      
+
       fetch(selected._id);
     }
   }, [selected, fetch]);
