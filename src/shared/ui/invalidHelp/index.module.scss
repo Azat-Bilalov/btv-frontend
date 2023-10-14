@@ -1,0 +1,25 @@
+.help {
+    display: flex;
+    padding: 10px 5px;
+    align-items: center;
+}
+
+.help img {
+    width: 25px;
+    margin-right: 5px;
+}
+
+.help-info b {
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.help-info p {
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    font-weight: lighter;
+    color: gray;
+}

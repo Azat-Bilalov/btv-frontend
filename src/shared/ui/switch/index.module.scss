@@ -1,0 +1,90 @@
+.switch {
+    position: relative;
+    width: 300px;
+    height: 40px;
+    border-radius: 8px;
+    border-color: blue;
+    border: 1px;
+}
+
+.switch input {
+    appearance: none;
+    width: 300px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgb(89, 89, 255);
+    outline: none;
+}
+
+.switch input::before,
+.switch input::after {
+    z-index: 2;
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    font-weight: bolder;
+}
+
+.switch input::before {
+    content: "Физлица";
+    left: 20px;
+}
+
+.switch input::after {
+    content: "Юрлица";
+    right: 20px;
+}
+
+.switch input:checked {
+    background: white;
+}
+
+.switch label {
+    z-index: 1;
+    position: absolute;
+    top: 1px;
+    bottom: 4px;
+    border-radius: 8px;
+}
+
+.switch input {
+    transition: 0.25s;
+}
+
+.switch input:checked::after{
+    color: blue;
+    transition: color 0.5s; 
+}
+.switch input:checked::before {
+    color: white;
+    transition: color 0.5s;
+}
+
+.switch input:checked+label {
+    left: 0px;
+    right: 58%;
+    background: blue;
+    transition: left 0.5s, right 0.4s 0.2s;
+}
+
+.switch input:not(:checked) {
+    background: white;
+    transition: background 0.4s;
+}
+
+.switch input:not(:checked)::before {
+    color: blue;
+    transition: color 0.5s;
+}
+
+.switch input:not(:checked)::after {
+    color: white;
+    transition: color 0.5s 0.2s;
+}
+
+.switch input:not(:checked) +label {
+    left: 58%;
+    right: 0px;
+    background: blue;
+    transition: left 0.4s 0.2s , right 0.5s, background 0.35s;
+}

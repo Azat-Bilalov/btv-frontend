@@ -1,0 +1,23 @@
+.navbar {
+    display: flex;
+    padding: 5px 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-evenly;
+    background-color: white;
+}
+
+.navbarItem {
+    align-items: center;
+}
+
+.navbarItemIcon {
+    width: 24px;
+    height: 24px;
+}
