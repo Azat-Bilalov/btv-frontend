@@ -16,6 +16,15 @@ const MapWidget: React.FC = () => {
     MOSCOW_CENTER,
   );
 
+  React.useEffect(() => {
+    const label = document.querySelector(
+      '.leaflet-control-attribution.leaflet-control',
+    );
+    if (label) {
+      label.innerHTML = 'Разработано в РТ';
+    }
+  }, [location]);
+
   return (
     <MapContainer
       center={location ?? MOSCOW_CENTER}

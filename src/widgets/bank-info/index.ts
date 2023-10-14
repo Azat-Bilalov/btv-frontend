@@ -1,1 +1,1 @@
-export { BankInfo } from './ui';
+export { default } from './ui';

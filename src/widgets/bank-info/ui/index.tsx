@@ -1,21 +1,40 @@
 import styles from './index.module.scss';
-import Cross from '../../../assets/cross.svg';
-import Metro from '../../../assets/metro.svg';
+import Cross from '@/assets/cross.svg';
+import Metro from '@/assets/metro.svg';
 import { Button } from '@/shared/ui/button';
 import { ButtonSize, ButtonType } from '@/shared/ui/button/types';
 import React, { useState } from 'react';
 import { Switch } from '@/shared/ui/switch';
 import { TimeList } from '@/shared/ui/timelist';
 import { InvalidHelp } from '@/shared/ui/invalidHelp';
+import { useMapStore } from '@/features/map/model';
+import { observer } from 'mobx-react-lite';
+import { useAtmStore } from '@/features/atm/model/hook';
 
 export type InfoProps = {
   onClose: () => void;
   isVisible: boolean;
 };
 
-export const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
-  
-    React.useEffect(() => {
+const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
+  const { selected } = useMapStore();
+  const { atm, fetch } = useAtmStore();
+
+  React.useEffect(() => {
+    if (selected && 
+      // если тип объекта не равен atm
+      
+      fetch(selected._id);
+    }
+  }, [selected, fetch]);
+
+  React.useEffect(() => {
+    if (atm) {
+      console.log(atm);
+    }
+  }, [atm]);
+
+  React.useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (isVisible) {
         const popup = document.querySelector(styles.bankInfo);
@@ -32,10 +51,10 @@ export const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
     return () => {
       document.removeEventListener('click', handleOutsideClick);
     };
-  }, [isVisible]);
+  }, [isVisible, onClose]);
 
   const [isSwitchedOn, setIsSwitchedOn] = useState(false);
-  let isHelp = true;
+  const isHelp = true;
   const handleSwitchChange = (newSwitchState: boolean) => {
     setIsSwitchedOn(newSwitchState);
   };
@@ -65,10 +84,8 @@ export const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
         <img src={Metro} />
         Окская
       </div>
-        {isHelp &&
-        <InvalidHelp/>
-        }
-    
+      {isHelp && <InvalidHelp />}
+
       <div className={styles.bankButtons}>
         <Button type={ButtonType.Primary} size={ButtonSize.Small}>
           Проложить путь
@@ -80,3 +97,5 @@ export const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
     </div>
   );
 };
+
+export default observer(BankInfo);

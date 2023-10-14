@@ -9,7 +9,7 @@ import {
   runInAction,
 } from 'mobx';
 
-type PrivateFields = '_atms' | '_meta';
+type PrivateFields = '_atm' | '_meta';
 
 export default class AtmStore implements ILocalStore {
   private _atm: AtmModel | null = null;
@@ -17,7 +17,7 @@ export default class AtmStore implements ILocalStore {
 
   constructor() {
     makeObservable<this, PrivateFields>(this, {
-      _atms: observable.ref,
+      _atm: observable.ref,
       _meta: observable.ref,
       atm: computed,
       meta: computed,

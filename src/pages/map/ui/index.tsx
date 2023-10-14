@@ -1,13 +1,14 @@
-import React, { useState, useEffect} from 'react';
-import { Button } from '@/shared/ui/button';
-import { ButtonType } from '@/shared/ui/button/types';
-import { BankInfo } from '@/widgets/bank-info';
+import React, { useState } from 'react';
+import BankInfo from '@/widgets/bank-info';
+import { MapStoreProvider } from '@/features/map/model';
+import MapWidget from '@/widgets/map';
+import { AtmStoreProvider } from '@/features/atm/model/provider';
 
 export const Map: React.FC = () => {
   const [isInfoVisible, setIsInfoVisible] = useState(false);
 
   const openInfo = () => {
-    console.log("open Info");
+    console.log('open Info');
     setIsInfoVisible(true);
   };
 
@@ -16,11 +17,12 @@ export const Map: React.FC = () => {
   };
 
   return (
-    <div>
-      Здесь будет карта, ну пожалуйста
-      {/* <Button type={ButtonType.Secondary} onClick={openInfo}>Инфа приди</Button> */}
-      <button onClick={openInfo}>Инфа приди</button>
-      <BankInfo isVisible={isInfoVisible} onClose={closeInfo} />
-    </div>
+    <MapStoreProvider>
+      <AtmStoreProvider>
+        <MapWidget />
+        <button onClick={openInfo}>Инфа приди</button>
+        <BankInfo isVisible={isInfoVisible} onClose={closeInfo} />
+      </AtmStoreProvider>
+    </MapStoreProvider>
   );
 };
