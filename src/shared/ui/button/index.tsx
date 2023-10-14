@@ -13,6 +13,7 @@ export const Button: React.FC<ButtonProps> = ({
   type = ButtonType.Primary,
   size = ButtonSize.Medium,
   children,
+  onClick,
 }) => {
   const cnButton = cn(
     styles.button,
@@ -20,5 +21,9 @@ export const Button: React.FC<ButtonProps> = ({
     styles[`button_size_${size}`],
   );
 
-  return <button className={cnButton}>{children}</button>;
+  return (
+    <button onClick={onClick} className={cnButton}>
+      {children}
+    </button>
+  );
 };

@@ -1,2 +1,7 @@
 @use 'tailwind.scss';
 @use 'reset.scss';
+
+body {
+  height: 100vh;
+  overflow: hidden;
+}

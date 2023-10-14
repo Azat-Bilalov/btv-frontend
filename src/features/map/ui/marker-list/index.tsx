@@ -37,8 +37,8 @@ const MarkerList: React.FC<MarkerListProps> = ({ instance, location }) => {
     };
   }, [bounds, fetch]);
 
-  /** изменение границ карты */
   useMapEvents({
+    /** изменение границ карты */
     moveend: (e) => {
       const bounds = e.target.getBounds();
       setBounds([bounds.getNorthEast(), bounds.getSouthWest()]);
@@ -46,6 +46,10 @@ const MarkerList: React.FC<MarkerListProps> = ({ instance, location }) => {
     zoomend: (e) => {
       const bounds = e.target.getBounds();
       setBounds([bounds.getNorthEast(), bounds.getSouthWest()]);
+    },
+    /** сброс выбранного объекта */
+    click: () => {
+      setSelected(null, null);
     },
   });
 

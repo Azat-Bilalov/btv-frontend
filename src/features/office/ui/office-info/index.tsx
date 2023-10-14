@@ -9,11 +9,11 @@ import { InvalidHelp } from '@/shared/ui/invalidHelp';
 import { useState } from 'react';
 
 export type InfoProps = {
-  onClose: () => void;
-  isVisible: boolean;
+  // onClose: () => void;
+  // isVisible: boolean;
 };
 
-export const OfficeInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
+export const OfficeInfo: React.FC<InfoProps> = () => {
   const [isSwitchedOn, setIsSwitchedOn] = useState(false);
   const isHelp = true;
   const handleSwitchChange = (newSwitchState: boolean) => {
@@ -23,13 +23,13 @@ export const OfficeInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
   return (
     <div
       className={styles.BankInfo}
-      style={{ transform: `translateX(${isVisible ? 0 : '100%'})` }}
+      // style={{ transform: `translateX(${isVisible ? 0 : '100%'})` }}
     >
       <div className={styles.BankInfoTop}>
         <div className={styles.topDistance}>20,7 km</div>
-        <div className={styles.topClose}>
+        {/* <div className={styles.topClose}>
           <img src={Cross} onClick={onClose} />
-        </div>
+        </div> */}
       </div>
 
       <div className={styles.BankInfoAddress}>

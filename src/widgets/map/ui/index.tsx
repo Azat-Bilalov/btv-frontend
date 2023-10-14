@@ -16,6 +16,7 @@ const MapWidget: React.FC = () => {
     MOSCOW_CENTER,
   );
 
+  /** изменение атрибуции */
   React.useEffect(() => {
     const label = document.querySelector(
       '.leaflet-control-attribution.leaflet-control',

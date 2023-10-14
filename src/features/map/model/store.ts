@@ -81,7 +81,10 @@ export default class MapStore implements ILocalStore {
     });
   }
 
-  setSelected(item: AtmModel | OfficeModel | null, type: 'atm' | 'office') {
+  setSelected(
+    item: AtmModel | OfficeModel | null,
+    type: 'atm' | 'office' | null,
+  ) {
     this._selected = item;
     this._selectedType = type;
   }
