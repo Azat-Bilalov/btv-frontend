@@ -27,6 +27,7 @@ const createRoutingMachine = (
     plan: L.Routing.plan([L.latLng(from), L.latLng(to)], {
       draggableWaypoints: false,
       addWaypoints: false,
+      createMarker: () => false,
     }),
 
     formatter: new L.Routing.Formatter({
@@ -34,6 +35,12 @@ const createRoutingMachine = (
       units: 'metric',
       distanceTemplate: '{value} м',
     }),
+
+    // иконочки для точек маршрута
+    pointMarkerStyle: {
+      radius: 0,
+      opacity: 0,
+    },
 
     show: false,
   });

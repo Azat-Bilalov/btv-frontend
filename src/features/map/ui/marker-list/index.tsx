@@ -12,7 +12,7 @@ export type MarkerListProps = {
 };
 
 const MarkerList: React.FC<MarkerListProps> = ({ instance, location }) => {
-  const { atms, offices, fetch, setSelected } = useMapStore();
+  const { atms, offices, selected, fetch, setSelected } = useMapStore();
   const [bounds, setBounds] = React.useState<LatLng[] | null>(null);
 
   /** получение объектов в радиусе видимости */
@@ -51,17 +51,33 @@ const MarkerList: React.FC<MarkerListProps> = ({ instance, location }) => {
 
   return (
     <>
-      {[...atms, ...offices].map((obj) => (
+      {atms.map((atm) => (
         <MapMarker
-          key={obj._id}
-          position={[obj.latitude, obj.longitude]}
+          key={atm._id}
+          type={selected?._id === atm._id ? 'active-atm' : 'atm'}
+          position={[atm.latitude, atm.longitude]}
           onClick={() => {
             if (location === null) return;
             instance.setWaypoints([
-              latLng([obj.latitude, obj.longitude]),
+              latLng([atm.latitude, atm.longitude]),
               location,
             ]);
-            setSelected(obj);
+            setSelected(atm);
+          }}
+        />
+      ))}
+      {offices.map((office) => (
+        <MapMarker
+          key={office._id}
+          type="office"
+          position={[office.latitude, office.longitude]}
+          onClick={() => {
+            if (location === null) return;
+            instance.setWaypoints([
+              latLng([office.latitude, office.longitude]),
+              location,
+            ]);
+            setSelected(office);
           }}
         />
       ))}
