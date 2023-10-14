@@ -12,7 +12,6 @@ export const MapMarker: React.FC<MapMarkerProps> = ({
   onClick,
   type,
 }) => {
-  if (type === 'active-atm') console.log('active-atm');
   return (
     <Marker
       position={position}

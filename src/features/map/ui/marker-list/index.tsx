@@ -51,7 +51,7 @@ const MarkerList: React.FC<MarkerListProps> = ({ instance, location }) => {
 
   return (
     <LayersControl position="topright">
-      <LayersControl.Overlay name="Банкоматы">
+      <LayersControl.Overlay checked name="Банкоматы">
         <LayerGroup>
           {atms.map((atm) => (
             <MapMarker
@@ -70,7 +70,7 @@ const MarkerList: React.FC<MarkerListProps> = ({ instance, location }) => {
           ))}
         </LayerGroup>
       </LayersControl.Overlay>
-      <LayersControl.Overlay name="Офисы">
+      <LayersControl.Overlay checked name="Офисы">
         <LayerGroup>
           {offices.map((office) => (
             <MapMarker

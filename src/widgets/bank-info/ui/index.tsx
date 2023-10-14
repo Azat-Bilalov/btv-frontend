@@ -4,7 +4,7 @@ import { useMapStore } from '@/features/map/model';
 import { observer } from 'mobx-react-lite';
 import { useAtmStore } from '@/features/atm/model/hook';
 // import { useOfficeStore } from '@/features/office/model/hook';
-import { OfficeInfo } from '@/features/atm/ui/office-info/ui';
+import { OfficeInfo } from '@/features/office/ui/office-info';
 import { ATMInfo } from '@/features/atm/ui/bankomat-info/ui';
 
 export type InfoProps = {
@@ -24,9 +24,11 @@ const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
       // } else {
       //   fetchAtm(selected._id);
       // }
-      fetchAtm(selected._id);
+      console.log(selectedType);
+
+      // fetchAtm(selected._id);
     }
-  }, [selected, fetchAtm]);
+  }, [selected, fetchAtm, selectedType]);
 
   React.useEffect(() => {
     if (atm) {
