@@ -12,6 +12,7 @@
 
   &_opened {
     transform: translateY(calc(100% - 100px));
+    overflow: auto;
   }
 
   &_fully-opened {

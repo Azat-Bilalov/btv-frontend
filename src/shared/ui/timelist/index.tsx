@@ -4,12 +4,16 @@ import Arrow from '../../../assets/arrow.svg';
 import { useState } from 'react';
 
 export type TimelistProps = {
-    isSwitchedOn: boolean;
-  }
+  isSwitchedOn: boolean;
+  phislist?: { days: string; hours: string }[];
+  urlist?: { days: string; hours: string }[];
+};
 
-export const TimeList: React.FC<TimelistProps> = (
-    { isSwitchedOn }
-) => {
+export const TimeList: React.FC<TimelistProps> = ({
+  isSwitchedOn,
+  phislist,
+  urlist,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const showInfo = () => {
@@ -23,27 +27,39 @@ export const TimeList: React.FC<TimelistProps> = (
           <img src={Time} />
           <div className={styles.timelistText}>
             <b>Режим работы</b>
-            <p>Обслуживание {isSwitchedOn ? 'физических' : 'юридических'} лиц до 19:00</p>
+            <p>
+              Обслуживание {isSwitchedOn ? 'физических' : 'юридических'} лиц до
+              19:00
+            </p>
           </div>
         </div>
         <div className={styles.timelistMore}>
-          <img src={Arrow} onClick={showInfo} className={isOpen ? styles.rotated : styles.rotatedReverse}/>
+          <img
+            src={Arrow}
+            onClick={showInfo}
+            className={isOpen ? styles.rotated : styles.rotatedReverse}
+          />
         </div>
       </div>
-      {isOpen && (
+      {isOpen && isSwitchedOn && (
         <div className={styles.timeInfo}>
-          <div className={styles.timeInfoItem}>
-            <div className={styles.InfoItemDay}>Понедельник</div>
-            <div className={styles.InfoItemTime}>08:00 - 18:00</div>
-          </div>
-          <div className={styles.timeInfoItem}>
-            <div className={styles.InfoItemDay}>Среда</div>
-            <div className={styles.InfoItemTime}>08:00 - 18:00</div>
-          </div>
-          <div className={styles.timeInfoItem}>
-            <div className={styles.InfoItemDay}>Пятница</div>
-            <div className={styles.InfoItemTime}>08:00 - 18:00</div>
-          </div>
+          {phislist?.map((item, index) => (
+            <div key={index} className={styles.timeInfoItem}>
+              <div className={styles.timeInfoItemDay}>{item.days}</div>
+              <div className={styles.timeInfoItemTime}>{item.hours}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {isOpen && !isSwitchedOn && (
+        <div className={styles.timeInfo}>
+          {urlist?.map((item, index) => (
+            <div key={index} className={styles.timeInfoItem}>
+              <div className={styles.timeInfoItemDay}>{item.days}</div>
+              <div className={styles.timeInfoItemTime}>{item.hours}</div>
+            </div>
+          ))}
         </div>
       )}
     </div>

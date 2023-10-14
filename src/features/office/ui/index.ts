@@ -1,1 +1,1 @@
-export * from './office-info';
+export {default} from './office-info';
