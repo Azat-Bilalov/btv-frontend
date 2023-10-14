@@ -21,7 +21,7 @@ export default class OfficeStore implements ILocalStore {
       _meta: observable.ref,
       office: computed,
       meta: computed,
-      fetch: action.bound,
+      fetchOffice: action.bound,
     });
   }
 
@@ -33,7 +33,7 @@ export default class OfficeStore implements ILocalStore {
     return this._meta;
   }
 
-  async fetch(id: string) {
+  async fetchOffice(id: string) {
     this._meta = Meta.Loading;
 
     const response = await axiosApi.get<OfficeModel>(`/office/${id}`);

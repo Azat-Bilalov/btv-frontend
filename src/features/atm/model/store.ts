@@ -21,7 +21,7 @@ export default class AtmStore implements ILocalStore {
       _meta: observable.ref,
       atm: computed,
       meta: computed,
-      fetch: action.bound,
+      fetchAtm: action.bound,
     });
   }
 
@@ -33,7 +33,7 @@ export default class AtmStore implements ILocalStore {
     return this._meta;
   }
 
-  async fetch(id: string) {
+  async fetchAtm(id: string) {
     this._meta = Meta.Loading;
 
     const response = await axiosApi.get<AtmModel>(`/atm/${id}`);

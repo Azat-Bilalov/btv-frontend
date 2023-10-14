@@ -1,7 +1,7 @@
 import { MapMarker } from '@/entities/map/ui';
 import { LatLng, Routing, latLng } from 'leaflet';
 import React from 'react';
-import { useMapEvents } from 'react-leaflet';
+import { LayersControl, LayerGroup, useMapEvents } from 'react-leaflet';
 import { useMapStore } from '../../model';
 import { observer } from 'mobx-react-lite';
 import _ from 'lodash';
@@ -50,38 +50,46 @@ const MarkerList: React.FC<MarkerListProps> = ({ instance, location }) => {
   });
 
   return (
-    <>
-      {atms.map((atm) => (
-        <MapMarker
-          key={atm._id}
-          type={selected?._id === atm._id ? 'active-atm' : 'atm'}
-          position={[atm.latitude, atm.longitude]}
-          onClick={() => {
-            if (location === null) return;
-            instance.setWaypoints([
-              latLng([atm.latitude, atm.longitude]),
-              location,
-            ]);
-            setSelected(atm, 'atm');
-          }}
-        />
-      ))}
-      {offices.map((office) => (
-        <MapMarker
-          key={office._id}
-          type="office"
-          position={[office.latitude, office.longitude]}
-          onClick={() => {
-            if (location === null) return;
-            instance.setWaypoints([
-              latLng([office.latitude, office.longitude]),
-              location,
-            ]);
-            setSelected(office, 'office');
-          }}
-        />
-      ))}
-    </>
+    <LayersControl position="topright">
+      <LayersControl.Overlay name="Банкоматы">
+        <LayerGroup>
+          {atms.map((atm) => (
+            <MapMarker
+              key={atm._id}
+              type={selected?._id === atm._id ? 'active-atm' : 'atm'}
+              position={[atm.latitude, atm.longitude]}
+              onClick={() => {
+                if (location === null) return;
+                instance.setWaypoints([
+                  latLng([atm.latitude, atm.longitude]),
+                  location,
+                ]);
+                setSelected(atm, 'atm');
+              }}
+            />
+          ))}
+        </LayerGroup>
+      </LayersControl.Overlay>
+      <LayersControl.Overlay name="Офисы">
+        <LayerGroup>
+          {offices.map((office) => (
+            <MapMarker
+              key={office._id}
+              type="office"
+              position={[office.latitude, office.longitude]}
+              onClick={() => {
+                if (location === null) return;
+                instance.setWaypoints([
+                  latLng([office.latitude, office.longitude]),
+                  location,
+                ]);
+                setSelected(office, 'office');
+              }}
+            />
+          ))}
+        </LayerGroup>
+      </LayersControl.Overlay>
+    </LayersControl>
   );
 };
 

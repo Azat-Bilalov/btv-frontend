@@ -1,8 +1,9 @@
 import styles from './index.module.scss';
-import React, { useState } from 'react';
+import React from 'react';
 import { useMapStore } from '@/features/map/model';
 import { observer } from 'mobx-react-lite';
 import { useAtmStore } from '@/features/atm/model/hook';
+// import { useOfficeStore } from '@/features/office/model/hook';
 import { OfficeInfo } from '@/features/atm/ui/office-info/ui';
 import { ATMInfo } from '@/features/atm/ui/bankomat-info/ui';
 
@@ -12,25 +13,27 @@ export type InfoProps = {
 };
 
 const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
-  const { selected } = useMapStore();
-  const { atm, fetch } = useAtmStore();
+  const { selected, selectedType } = useMapStore();
+  const { atm, fetchAtm } = useAtmStore();
+  // const { office, fetchOffice } = useOfficeStore();
 
   React.useEffect(() => {
     if (selected) {
-      // если тип объекта не равен atm
-
-      fetch(selected._id);
+      // if (selectedType === 'office') {
+      //   fetchOffice(selected._id);
+      // } else {
+      //   fetchAtm(selected._id);
+      // }
+      fetchAtm(selected._id);
     }
-  }, [selected, fetch]);
+  }, [selected, fetchAtm]);
 
   React.useEffect(() => {
     if (atm) {
       console.log(atm);
     }
   }, [atm]);
-  
-  const [isOffice, setIsOffice] = useState(true);
-  
+
   React.useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (isVisible) {
@@ -87,7 +90,7 @@ const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
     //   </div>
     // </div>
     <>
-      {isOffice ? (
+      {selectedType === 'office' ? (
         <OfficeInfo onClose={onClose} isVisible={isVisible} />
       ) : (
         <ATMInfo onClose={onClose} isVisible={isVisible} />
