@@ -18,24 +18,29 @@
     font-size: 15px;
 }
 
+.bank-info-switch {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
 .bank-info-address {
     padding: 10px 0;
     font-size: 12px;
 }
 
-.bank-services {
-    display: block;
-}
-
-.bank-services-invalid,
-.bank-services-currency{
+.bank-info-phone {
     display: flex;
+    text-align: center;
+    padding: 10px 0px;
+    color:rgb(172, 97, 243); 
 }
 
-.bank-services-invalid img,
-.bank-services-currency img{
-    width: 25px;
-    padding: 5px;
+.bank-info-phone img {
+    width: 20px;
+    margin-right: 10px;
 }
 
 .top-close img {
