@@ -16,7 +16,7 @@ export type InfoProps = {
   isVisible: boolean;
 };
 
-const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
+const OfficeInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
   const { selected } = useMapStore();
   const { atm, fetch } = useAtmStore();
 
@@ -37,7 +37,7 @@ const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
   React.useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (isVisible) {
-        const popup = document.querySelector(styles.bankInfo);
+        const popup = document.querySelector(styles.OfficeInfo);
         console.log(popup);
 
         if (popup && !popup.contains(event.target as Node)) {
@@ -61,26 +61,26 @@ const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
 
   return (
     <div
-      className={styles.bankInfo}
+      className={styles.OfficeInfo}
       style={{ transform: `translateX(${isVisible ? 0 : '100%'})` }}
     >
-      <div className={styles.bankInfoTop}>
+      <div className={styles.OfficeInfoTop}>
         <div className={styles.topDistance}>20,7 km</div>
         <div className={styles.topClose}>
           <img src={Cross} onClick={onClose} />
         </div>
       </div>
 
-      <div className={styles.bankInfoAddress}>
+      <div className={styles.OfficeInfoAddress}>
         11097, ул. Пушкина д. Колотушкина
       </div>
-      <div className={styles.bankInfoSwitch}>
+      <div className={styles.OfficeInfoSwitch}>
         <Switch onSwitchChange={handleSwitchChange} />
       </div>
-      <div className={styles.bankInfoOpentime}>
+      <div className={styles.OfficeInfoOpentime}>
         <TimeList isSwitchedOn={isSwitchedOn} />
       </div>
-      <div className={styles.bankInfoMetro}>
+      <div className={styles.OfficeInfoMetro}>
         <img src={Metro} />
         Окская
       </div>
@@ -98,4 +98,4 @@ const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
   );
 };
 
-export default observer(BankInfo);
+export default observer(OfficeInfo);
