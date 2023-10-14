@@ -16,11 +16,6 @@ export const TimeList: React.FC<TimelistProps> = (
     setIsOpen(!isOpen);
   };
 
-  const arrowStyle = {
-    transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-    transition: 'transform 0.3s', // Плавная анимация поворота
-  };
-
   return (
     <div>
       <div className={styles.timelist}>
