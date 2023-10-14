@@ -1,4 +1,4 @@
-import styles from './index.module.scss'
+import styles from './index.module.scss';
 import Metro from '@/assets/metro.svg';
 import { Button } from '@/shared/ui/button';
 import { ButtonSize, ButtonType } from '@/shared/ui/button/types';
@@ -10,21 +10,22 @@ import { useOfficeStore } from '../../model';
 import { useMapStore } from '@/features/map/model';
 import React from 'react';
 import { observer } from 'mobx-react-lite';
+import { latLng } from 'leaflet';
 
-export type InfoProps = {
-  // onClose: () => void;
-  // isVisible: boolean;
+export type OfficeInfoProps = {
+  handleWrap: () => void;
 };
 
-const OfficeInfo: React.FC<InfoProps> = () => {
+const OfficeInfo: React.FC<OfficeInfoProps> = ({ handleWrap }) => {
   const [isSwitchedOn, setIsSwitchedOn] = useState(false);
   const handleSwitchChange = (newSwitchState: boolean) => {
     setIsSwitchedOn(newSwitchState);
   };
 
-  const { selected, selectedType } = useMapStore();
+  const { selected, selectedType, router, location } = useMapStore();
   const { office, fetchOffice } = useOfficeStore();
 
+  /** При выборе объекта, если это отделение, то запрашиваем его данные */
   React.useEffect(() => {
     if (selected) {
       if (selectedType === 'office') {
@@ -33,19 +34,23 @@ const OfficeInfo: React.FC<InfoProps> = () => {
     }
   }, [selected, fetchOffice]);
 
-  if (selectedType !== 'office') return null;
+  /** Обработка поиска маршрута */
+  const handleRoute = () => {
+    if (!router || !location || !office) return;
+    router?.setWaypoints([location, latLng(office.latitude, office.longitude)]);
+    handleWrap();
+  };
+
+  /** Сброс маршрута */
+  const handleReset = () => {
+    router?.setWaypoints([]);
+    handleWrap();
+  };
+
+  if (selectedType !== 'office' || office === null) return null;
 
   return (
-    <div
-      className={styles.bankInfo}
-      // style={{ transform: `translateX(${isVisible ? 0 : '100%'})` }}
-    >
-      <div className={styles.bankInfoTop}>
-        {/* <div className={styles.topClose}>
-          <img src={Cross} onClick={onClose} />
-        </div> */}
-      </div>
-
+    <div className={styles.bankInfo}>
       <div className={styles.bankInfoAddress}>{office?.address}</div>
       <div className={styles.bankInfoSwitch}>
         <Switch onSwitchChange={handleSwitchChange} />
@@ -67,9 +72,29 @@ const OfficeInfo: React.FC<InfoProps> = () => {
       {office?.hasRamp && <InvalidHelp />}
 
       <div className={styles.bankButtons}>
-        <Button type={ButtonType.Primary} size={ButtonSize.Small}>
-          Проложить путь
-        </Button>
+        {router?.getWaypoints().find((w) => {
+          return (
+            w.latLng !== null &&
+            w.latLng.lat === office?.latitude &&
+            w.latLng.lng === office?.longitude
+          );
+        }) ? (
+          <Button
+            onClick={handleReset}
+            type={ButtonType.Primary}
+            size={ButtonSize.Small}
+          >
+            Сбросить путь
+          </Button>
+        ) : (
+          <Button
+            onClick={handleRoute}
+            type={ButtonType.Primary}
+            size={ButtonSize.Small}
+          >
+            Проложить путь
+          </Button>
+        )}
         <Button type={ButtonType.Secondary} size={ButtonSize.Small}>
           Занять очередь
         </Button>

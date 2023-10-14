@@ -18,7 +18,10 @@ const MapWidget: React.FC = () => {
   );
 
   /** сохранение инстанса роутера в стор */
-  useMapStore().setRouter(instance);
+  const { setRouter } = useMapStore();
+  React.useEffect(() => {
+    setRouter(instance);
+  }, [instance, setRouter]);
 
   /** изменение атрибуции */
   React.useEffect(() => {

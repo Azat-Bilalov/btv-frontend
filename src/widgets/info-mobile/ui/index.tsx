@@ -5,17 +5,14 @@ import Cross from '@/assets/cross.svg';
 import { useMapStore } from '@/features/map/model';
 import { Button } from '@/shared/ui/button';
 import React from 'react';
+import OfficeInfo from '@/features/office/ui/office-info';
 
-export type InfoMobileProps = {
-  children: React.ReactNode;
-};
-
-const InfoMobileWidget: React.FC<InfoMobileProps> = ({ children }) => {
+const InfoMobileWidget: React.FC = () => {
   // есть три состояния
   // 1. ничего не выбрано (она не отображается)
   // 2. выбран объект (отображается, но не открыта)
   // 3. открыта (отображается и открыта)
-  const { selected } = useMapStore();
+  const { selected, selectedType } = useMapStore();
   const [fullyOpened, setFullyOpened] = React.useState(false);
   const [touchStart, setTouchStart] = React.useState(0);
 
@@ -52,7 +49,9 @@ const InfoMobileWidget: React.FC<InfoMobileProps> = ({ children }) => {
         onTouchStart={touchStartHandler}
         onTouchMove={touchMoveHandler}
       >
-        <div className={styles.infoMobileTopTitle}>Офис</div>
+        <div className={styles.infoMobileTopTitle}>
+          {selectedType === 'office' ? 'Отделение' : 'Банкомат'}
+        </div>
         {fullyOpened ? (
           <div className={styles.infoMobileTopClose}>
             <img src={Cross} onClick={() => setFullyOpened(false)} />
@@ -61,7 +60,9 @@ const InfoMobileWidget: React.FC<InfoMobileProps> = ({ children }) => {
           <Button onClick={() => setFullyOpened(true)}>Подробнее</Button>
         )}
       </div>
-      <div className={styles.infoMobileContent}>{children}</div>
+      <div className={styles.infoMobileContent}>
+        <OfficeInfo handleWrap={() => setFullyOpened(false)} />
+      </div>
     </div>
   );
 };

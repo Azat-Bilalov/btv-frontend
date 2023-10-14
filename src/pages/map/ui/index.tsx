@@ -4,7 +4,6 @@ import MapWidget from '@/widgets/map';
 import { AtmStoreProvider } from '@/features/atm/model/provider';
 import InfoMobileWidget from '@/widgets/info-mobile';
 import { OfficeStoreProvider } from '@/features/office/model';
-import  OfficeInfo  from '@/features/office/ui';
 
 export const Map: React.FC = () => {
   return (
@@ -12,11 +11,7 @@ export const Map: React.FC = () => {
       <AtmStoreProvider>
         <OfficeStoreProvider>
           <MapWidget />
-          {/* <button onClick={openInfo}>Инфа приди</button>*/}
-          {/* <BankInfo isVisible={isInfoVisible} onClose={closeInfo} /> */}
-          <InfoMobileWidget>
-            <OfficeInfo />
-          </InfoMobileWidget>
+          <InfoMobileWidget />
         </OfficeStoreProvider>
       </AtmStoreProvider>
     </MapStoreProvider>
