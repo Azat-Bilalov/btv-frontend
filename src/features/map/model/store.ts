@@ -11,12 +11,18 @@ import {
 } from 'mobx';
 import { RequestParams, Response } from './types';
 
-type PrivateFields = '_atms' | '_offices' | '_selected' | '_meta';
+type PrivateFields =
+  | '_atms'
+  | '_offices'
+  | '_selected'
+  | '_selectedType'
+  | '_meta';
 
 export default class MapStore implements ILocalStore {
   private _atms: AtmModel[] = [];
   private _offices: OfficeModel[] = [];
   private _selected: AtmModel | OfficeModel | null = null;
+  private _selectedType: 'atm' | 'office' | null = null;
   private _meta: Meta = Meta.Initial;
 
   constructor() {
@@ -24,10 +30,12 @@ export default class MapStore implements ILocalStore {
       _atms: observable.ref,
       _offices: observable.ref,
       _selected: observable.ref,
+      _selectedType: observable.ref,
       _meta: observable,
       atms: computed,
       offices: computed,
       selected: computed,
+      selectedType: computed,
       meta: computed,
       fetch: action.bound,
       setSelected: action.bound,
@@ -44,6 +52,10 @@ export default class MapStore implements ILocalStore {
 
   get selected() {
     return this._selected;
+  }
+
+  get selectedType() {
+    return this._selectedType;
   }
 
   get meta() {
@@ -69,8 +81,9 @@ export default class MapStore implements ILocalStore {
     });
   }
 
-  setSelected(item: AtmModel | OfficeModel | null) {
+  setSelected(item: AtmModel | OfficeModel | null, type: 'atm' | 'office') {
     this._selected = item;
+    this._selectedType = type;
   }
 
   destroy() {}

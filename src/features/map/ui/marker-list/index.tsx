@@ -62,7 +62,7 @@ const MarkerList: React.FC<MarkerListProps> = ({ instance, location }) => {
               latLng([atm.latitude, atm.longitude]),
               location,
             ]);
-            setSelected(atm);
+            setSelected(atm, 'atm');
           }}
         />
       ))}
@@ -77,7 +77,7 @@ const MarkerList: React.FC<MarkerListProps> = ({ instance, location }) => {
               latLng([office.latitude, office.longitude]),
               location,
             ]);
-            setSelected(office);
+            setSelected(office, 'office');
           }}
         />
       ))}
