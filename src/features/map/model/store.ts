@@ -10,13 +10,15 @@ import {
   runInAction,
 } from 'mobx';
 import { RequestParams, Response } from './types';
+import { Routing } from 'leaflet';
 
 type PrivateFields =
   | '_atms'
   | '_offices'
   | '_selected'
   | '_selectedType'
-  | '_meta';
+  | '_meta'
+  | '_router';
 
 export default class MapStore implements ILocalStore {
   private _atms: AtmModel[] = [];
@@ -25,6 +27,8 @@ export default class MapStore implements ILocalStore {
   private _selectedType: 'atm' | 'office' | null = null;
   private _meta: Meta = Meta.Initial;
 
+  private _router: Routing.Control | null = null;
+
   constructor() {
     makeObservable<this, PrivateFields>(this, {
       _atms: observable.ref,
@@ -32,13 +36,16 @@ export default class MapStore implements ILocalStore {
       _selected: observable.ref,
       _selectedType: observable.ref,
       _meta: observable,
+      _router: observable.ref,
       atms: computed,
       offices: computed,
       selected: computed,
       selectedType: computed,
       meta: computed,
+      router: computed,
       fetch: action.bound,
       setSelected: action.bound,
+      setRouter: action.bound,
     });
   }
 
@@ -60,6 +67,10 @@ export default class MapStore implements ILocalStore {
 
   get meta() {
     return this._meta;
+  }
+
+  get router() {
+    return this._router;
   }
 
   async fetch(params: RequestParams) {
@@ -87,6 +98,10 @@ export default class MapStore implements ILocalStore {
   ) {
     this._selected = item;
     this._selectedType = type;
+  }
+
+  setRouter(router: Routing.Control | null) {
+    this._router = router;
   }
 
   destroy() {}

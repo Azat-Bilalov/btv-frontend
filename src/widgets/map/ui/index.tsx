@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import createRoutingMachine from '@/entities/map/lib/RoutineMachine';
 import { MapLocationMarker } from '@/entities/map/ui/map-location-marker';
 import MarkerList from '@/features/map/ui/marker-list';
+import { useMapStore } from '@/features/map/model';
 
 const MOSCOW_CENTER = [55.752, 37.615] as [number, number];
 
@@ -15,6 +16,9 @@ const MapWidget: React.FC = () => {
     MOSCOW_CENTER,
     MOSCOW_CENTER,
   );
+
+  /** сохранение инстанса роутера в стор */
+  useMapStore().setRouter(instance);
 
   /** изменение атрибуции */
   React.useEffect(() => {
@@ -37,7 +41,7 @@ const MapWidget: React.FC = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <MarkerList location={location} instance={instance} />
+      <MarkerList />
       <MapLocationMarker location={location} setLocation={setLocation} />
       <Router />
     </MapContainer>
