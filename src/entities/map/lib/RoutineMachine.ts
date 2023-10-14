@@ -2,6 +2,7 @@ import L from 'leaflet';
 import { createControlComponent } from '@react-leaflet/core';
 import 'leaflet-routing-machine';
 import 'lrm-graphhopper';
+import { BASE_URL } from '@/shared/api';
 
 const createRoutingMachine = (
   from: [number, number],
@@ -9,7 +10,9 @@ const createRoutingMachine = (
   vehicle?: 'foot' | 'car',
 ) => {
   const instance = L.Routing.control({
-    router: L.Routing.graphHopper('f3b34e0e-fae0-491c-9087-2980a0290a34', {
+    // router: L.Routing.graphHopper('f3b34e0e-fae0-491c-9087-2980a0290a34', {
+    router: L.Routing.graphHopper(undefined, {
+      serviceUrl: `${BASE_URL}/route`,
       urlParameters: {
         vehicle: vehicle || 'foot',
       },

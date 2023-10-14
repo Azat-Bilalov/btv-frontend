@@ -5,9 +5,9 @@ import { Navabar } from '@/widgets/navbar/ui';
 const MainLayout: React.FC = () => {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <Outlet />
-      <Navabar/>
+      <Navabar />
     </div>
   );
 };
