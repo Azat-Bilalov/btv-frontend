@@ -24,7 +24,7 @@ const OfficeInfo: React.FC<OfficeInfoProps> = ({ handleWrap }) => {
 
   const { selected, selectedType, router, location } = useMapStore();
   const { office, fetchOffice } = useOfficeStore();
-
+  
   /** При выборе объекта, если это отделение, то запрашиваем его данные */
   React.useEffect(() => {
     if (selected) {
