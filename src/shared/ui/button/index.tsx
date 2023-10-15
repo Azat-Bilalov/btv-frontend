@@ -7,6 +7,8 @@ export type ButtonProps = {
   size?: ButtonSize;
   onClick?: () => void;
   children: React.ReactNode;
+  submit?: boolean;
+  className?: string;
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -14,15 +16,22 @@ export const Button: React.FC<ButtonProps> = ({
   size = ButtonSize.Medium,
   children,
   onClick,
+  submit = false,
+  className,
 }) => {
   const cnButton = cn(
     styles.button,
     styles[`button_type_${type}`],
     styles[`button_size_${size}`],
+    className,
   );
 
   return (
-    <button onClick={onClick} className={cnButton}>
+    <button
+      onClick={onClick}
+      type={submit ? 'submit' : undefined}
+      className={cnButton}
+    >
       {children}
     </button>
   );

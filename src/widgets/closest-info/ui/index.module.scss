@@ -1,0 +1,41 @@
+.closest-info {
+  width: 100%;
+  height: 80vh;
+  position: absolute;
+  bottom: 0;
+  z-index: 599;
+  background-color: #fff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+
+  &_opened {
+    transform: translateY(calc(100% - 100px));
+    overflow: auto;
+  }
+
+  &_fully-opened {
+    transform: translateY(0);
+  }
+
+  &-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+    &-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
+      margin-right: 20px;
+    }
+
+    &-close {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.closest-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    &-address {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0a2896;
+    }
+
+    &-arrive {
+      font-size: 14px;
+      font-weight: 400;
+      color: #000;
+    }
+
+    &-wait {
+      font-size: 14px;
+      font-weight: 400;
+
+      &-now {
+        color: #4cc864;
+      }
+
+      &-time {
+        color: #000;
+      }
+    }
+  }
+}

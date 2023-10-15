@@ -4,6 +4,7 @@ import MapWidget from '@/widgets/map';
 import { AtmStoreProvider } from '@/features/atm/model/provider';
 import InfoMobileWidget from '@/widgets/info-mobile';
 import { OfficeStoreProvider } from '@/features/office/model';
+import ClosestInfo from '@/widgets/closest-info';
 
 export const Map: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ export const Map: React.FC = () => {
         <OfficeStoreProvider>
           <MapWidget />
           <InfoMobileWidget />
+          <ClosestInfo />
         </OfficeStoreProvider>
       </AtmStoreProvider>
     </MapStoreProvider>
