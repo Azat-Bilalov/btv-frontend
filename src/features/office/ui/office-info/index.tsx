@@ -12,6 +12,7 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { latLng } from 'leaflet';
 import OfficeLoadChart from '@/entities/office/ui/chart';
+import { useQueueStore } from '@/entities/queue/model';
 
 export type OfficeInfoProps = {
   handleWrap: () => void;
@@ -26,6 +27,7 @@ const OfficeInfo: React.FC<OfficeInfoProps> = ({ handleWrap }) => {
 
   const { selected, selectedType, router, location } = useMapStore();
   const { office, fetchOffice } = useOfficeStore();
+  const { fetchQueue } = useQueueStore();
 
   /** При выборе объекта, если это отделение, то запрашиваем его данные */
   React.useEffect(() => {
@@ -47,6 +49,12 @@ const OfficeInfo: React.FC<OfficeInfoProps> = ({ handleWrap }) => {
   const handleReset = () => {
     router?.setWaypoints([]);
     handleWrap();
+  };
+
+  /** Занять очередь */
+  const handleQueue = () => {
+    if (!office) return;
+    fetchQueue(office._id, office.address);
   };
 
   if (selectedType !== 'office' || office === null) return null;
@@ -119,7 +127,11 @@ const OfficeInfo: React.FC<OfficeInfoProps> = ({ handleWrap }) => {
             Проложить путь
           </Button>
         )}
-        <Button type={ButtonType.Secondary} size={ButtonSize.Small}>
+        <Button
+          onClick={handleQueue}
+          type={ButtonType.Secondary}
+          size={ButtonSize.Small}
+        >
           Занять очередь
         </Button>
       </div>

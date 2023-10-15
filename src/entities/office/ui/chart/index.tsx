@@ -71,8 +71,6 @@ const OfficeLoadChart: React.FC<OfficeLoadChartProps> = ({
     ],
   };
 
-  console.log(data);
-
   return <Bar options={options} data={data} />;
 };
 

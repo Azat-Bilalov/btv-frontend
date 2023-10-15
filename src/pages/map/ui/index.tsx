@@ -5,15 +5,18 @@ import { AtmStoreProvider } from '@/features/atm/model/provider';
 import InfoMobileWidget from '@/widgets/info-mobile';
 import { OfficeStoreProvider } from '@/features/office/model';
 import ClosestInfo from '@/widgets/closest-info';
+import { QueueStoreProvider } from '@/entities/queue/model';
 
 export const Map: React.FC = () => {
   return (
     <MapStoreProvider>
       <AtmStoreProvider>
         <OfficeStoreProvider>
-          <MapWidget />
-          <InfoMobileWidget />
-          <ClosestInfo />
+          <QueueStoreProvider>
+            <MapWidget />
+            <InfoMobileWidget />
+            <ClosestInfo />
+          </QueueStoreProvider>
         </OfficeStoreProvider>
       </AtmStoreProvider>
     </MapStoreProvider>

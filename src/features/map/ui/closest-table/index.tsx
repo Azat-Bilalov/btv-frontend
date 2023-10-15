@@ -6,7 +6,6 @@ const ClosestTable = () => {
   const { atms, offices, closestTimes } = useMapStore();
 
   if (closestTimes === null) return null;
-  console.log(closestTimes);
 
   return (
     <div className={styles.closestTable}>

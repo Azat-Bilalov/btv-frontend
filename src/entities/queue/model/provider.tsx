@@ -1,6 +1,6 @@
-import React from "react";
-import QueueStore from "./store";
-import { useLocalStore } from "@/shared/lib/hooks";
+import React from 'react';
+import QueueStore from './store';
+import { useLocalStore } from '@/shared/lib/hooks';
 
 export const QueueStoreContext = React.createContext<QueueStore | null>(null);
 

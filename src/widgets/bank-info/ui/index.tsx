@@ -28,22 +28,9 @@ const BankInfo: React.FC<InfoProps> = ({ onClose, isVisible }) => {
   }, [selected, fetchAtm, fetchOffice]);
 
   React.useEffect(() => {
-    if (atm) {
-      console.log(atm);
-    }
-  }, [atm]);
-
-  React.useEffect(() => {
-    if (office) {
-      console.log(office);
-    }
-  }, [office]);
-
-  React.useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (isVisible) {
         const popup = document.querySelector(styles.BankInfo);
-        console.log(popup);
 
         if (popup && !popup.contains(event.target as Node)) {
           onClose();

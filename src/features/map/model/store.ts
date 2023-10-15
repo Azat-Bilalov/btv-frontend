@@ -150,7 +150,6 @@ export default class MapStore implements ILocalStore {
 
       this._atms = response.data.atms?.map((item) => item.atm) ?? [];
       this._offices = response.data.offices?.map((item) => item.office) ?? [];
-      console.log(this._atms, this._offices);
 
       this._meta = Meta.Success;
     });
