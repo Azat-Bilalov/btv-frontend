@@ -11,6 +11,7 @@ import { useMapStore } from '@/features/map/model';
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { latLng } from 'leaflet';
+import OfficeLoadChart from '@/entities/office/ui/chart';
 
 export type OfficeInfoProps = {
   handleWrap: () => void;
@@ -21,10 +22,11 @@ const OfficeInfo: React.FC<OfficeInfoProps> = ({ handleWrap }) => {
   const handleSwitchChange = (newSwitchState: boolean) => {
     setIsSwitchedOn(newSwitchState);
   };
+  const [day, setDay] = useState('пн');
 
   const { selected, selectedType, router, location } = useMapStore();
   const { office, fetchOffice } = useOfficeStore();
-  
+
   /** При выборе объекта, если это отделение, то запрашиваем его данные */
   React.useEffect(() => {
     if (selected) {
@@ -70,6 +72,28 @@ const OfficeInfo: React.FC<OfficeInfoProps> = ({ handleWrap }) => {
       )}
 
       {office?.hasRamp && <InvalidHelp />}
+
+      {office?.openHours && (
+        <>
+          <select
+            value={day}
+            onChange={(e) => setDay(e.target.value)}
+            className={styles.bankInfoSelect}
+          >
+            {office?.openHours
+              .map(
+                (item) =>
+                  item.hours !== 'выходной' && (
+                    <option key={item.days} value={item.days}>
+                      {item.days}
+                    </option>
+                  ),
+              )
+              .filter(Boolean)}
+          </select>
+          <OfficeLoadChart day={day} openHours={office.openHours} />
+        </>
+      )}
 
       <div className={styles.bankButtons}>
         {router?.getWaypoints().find((w) => {

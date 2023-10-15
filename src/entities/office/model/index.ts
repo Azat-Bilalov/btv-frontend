@@ -8,18 +8,17 @@ export type OfficeModel = {
   salePointName: string;
   address: string;
   status: string;
-  openHours: [
-    {
-      days: string;
-      hours: string;
-    },
-  ];
   openHoursIndividual: [
     {
       days: string;
       hours: string;
     },
   ];
+  openHours: {
+    days: string;
+    hours: string;
+    averageLoad: number[];
+  }[];
   officeType: string;
   salePointFormat: string;
   suoAvailability: {

@@ -1,3 +1,5 @@
 export type QueueModel = {
-    qrCode: string;
+  qrCode: string;
 };
+
+type PrivateFields = '_id' | 'createdAt' | 'updatedAt';
