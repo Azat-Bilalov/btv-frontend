@@ -1,1 +1,0 @@
-import { ATMInfo } from "./ui";

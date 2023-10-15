@@ -6,6 +6,7 @@ import { useMapStore } from '@/features/map/model';
 import { Button } from '@/shared/ui/button';
 import React from 'react';
 import OfficeInfo from '@/features/office/ui/office-info';
+import ATMInfo from '@/features/atm/ui/bankomat-info';
 
 const InfoMobileWidget: React.FC = () => {
   // есть три состояния
@@ -62,6 +63,7 @@ const InfoMobileWidget: React.FC = () => {
       </div>
       <div className={styles.infoMobileContent}>
         <OfficeInfo handleWrap={() => setFullyOpened(false)} />
+        <ATMInfo handleWrap={() => setFullyOpened(false)} />
       </div>
     </div>
   );
